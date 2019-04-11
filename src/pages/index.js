@@ -1,12 +1,17 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
+const largeCircleDiameter = 45;
+const largeCircleDiameterTiny = (63 / 100) * largeCircleDiameter;
+
+const tinyCircleDiameter = (53 / 100) * largeCircleDiameter;
+
 const smallDot = keyframes`
   0% {
-    transform: translateY(31px);
+    transform: translateY(${largeCircleDiameter + 1}px);
   }
   50% {
-    transform: translate(5px, 31px);
+    transform: translate(5px, ${largeCircleDiameter + 1}px);
     width: 7px;
     height: 7px;
   }
@@ -23,6 +28,7 @@ const largeDot = keyframes`
   }
   to {
     background-color: transparent;
+    border: 1px solid #000;
     width: 19px;
     height: 19px;
   }
@@ -31,42 +37,29 @@ const largeDot = keyframes`
 const LogoWrapper = styled.div`
   position: relative;
   pointer-events: none;
-  width: 29px;
+  width: ${largeCircleDiameter - 1}px;
+  cursor: none;
+  opacity: 0;
   .large-dot,
   .small-dot {
     transition: all 0.3s;
     left: 0;
     background-color: #000;
     border-radius: 100%;
-    border: 1px solid #000;
   }
   .large-dot {
     animation: ${largeDot} 0.5s 1.5s cubic-bezier(0.6, 0.04, 0.98, 0.335)
       forwards;
-    width: 29px;
-    height: 29px;
+    width: ${largeCircleDiameter}px;
+    height: ${largeCircleDiameter}px;
     position: relative;
   }
   .small-dot {
-    animation: ${smallDot} 1s 1s cubic-bezier(0.95, 0.05, 0.795, 0.035) forwards;
-    transform: translateY(31px);
-    width: 15px;
-    height: 15px;
-    top: 31px;
-  }
-
-  &:hover {
-    .large-dot {
-      width: 29px;
-      height: 29px;
-      background-color: transparent;
-    }
-    .small-dot {
-      transform: translate(6px, 6px);
-      width: 15px;
-      height: 15px;
-      top: 31px;
-    }
+    animation: ${smallDot} 1s 1s cubic-bezier(0.755, 0.05, 0.855, 0.06) forwards;
+    transform: translateY(${largeCircleDiameter + 2}px);
+    width: ${tinyCircleDiameter}px;
+    height: ${tinyCircleDiameter}px;
+    top: ${largeCircleDiameter + 1}px;
   }
 `;
 
@@ -75,8 +68,8 @@ class Logo extends React.PureComponent {
     x: 0,
     y: 0,
     animate: false,
-    firstMouseMove: true,
     style: {
+      opacity: 0,
       width: 20
     }
   };
@@ -89,7 +82,7 @@ class Logo extends React.PureComponent {
         style: {
           ...state.style,
           transition: null,
-          width: 20,
+          width: 30,
           transform: `translate(${event.clientX - 7}px, ${event.clientY - 7}px)`
         }
       }));
@@ -102,30 +95,32 @@ class Logo extends React.PureComponent {
   };
 
   componentDidMount() {
-    this.setState({
+    this.setState(state => ({
       x: window.innerWidth / 2,
-      y: window.innerHeight / 2,
+      y: (window.innerHeight + 10) / 2,
       style: {
-        transition: `transform 0.3s`,
-        transform: `translate(${window.innerWidth / 2}px, ${this.state.y -
-          7}px)`
+        ...state.style,
+        opacity: 1,
+        transform: `translate(${(window.innerWidth - this.state.style.width) /
+          2}px, ${window.innerHeight / 2}px)`
       }
-    });
+    }));
     setTimeout(() => {
-      this.setState({
+      this.setState(state => ({
         animate: true,
         style: {
+          ...state.style,
+          width: 19,
           transition: `transform 0.3s`,
-          transform: `translate(${this.state.x}px, ${this.state.y - 7}px)`
+          transform: `translate(${this.state.x - 9}px, ${this.state.y - 4}px)`
         }
-      });
+      }));
     }, 2000);
 
     window.addEventListener('mousemove', this.handleMouseMove);
   }
 
   render() {
-    const { x, y } = this.state;
     const { className } = this.props;
 
     return (
