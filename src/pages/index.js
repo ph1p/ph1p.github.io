@@ -72,8 +72,8 @@ const LogoWrapper = styled.div`
 
 class Logo extends React.PureComponent {
   state = {
-    x: window.innerWidth / 2,
-    y: window.innerHeight / 2,
+    x: 0,
+    y: 0,
     animate: false,
     firstMouseMove: true,
     style: {
@@ -103,6 +103,8 @@ class Logo extends React.PureComponent {
 
   componentDidMount() {
     this.setState({
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
       style: {
         transition: `transform 0.3s`,
         transform: `translate(${window.innerWidth / 2}px, ${this.state.y -
@@ -114,7 +116,7 @@ class Logo extends React.PureComponent {
         animate: true,
         style: {
           transition: `transform 0.3s`,
-          transform: `translate(${this.state.x}px, ${this.state.y-7}px)`
+          transform: `translate(${this.state.x}px, ${this.state.y - 7}px)`
         }
       });
     }, 2000);
