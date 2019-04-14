@@ -4,10 +4,9 @@
  * @author Lea Verou
  */
 
-
 code[class*='language-'],
 pre[class*='language-'] {
-  color: #282c34;
+  color: #c7c7c7;
   background: none;
   font-family: Menlo, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   text-align: left;
@@ -23,6 +22,11 @@ pre[class*='language-'] {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
+}
+
+code[class*='language-javascript'],
+pre[class*='language-javascript'] {
+  color: #e5c077;
 }
 
 pre[class*='language-']::-moz-selection,
@@ -174,4 +178,27 @@ pre.line-numbers > code {
   display: block;
   padding-right: 0.8em;
   text-align: right;
+}
+
+.gatsby-highlight {
+  padding: 0 1em;
+  background: #282c34;
+}
+
+.gatsby-highlight pre[class*='language-'].line-numbers {
+  padding: 2em 2.8em;
+  padding-left: 2em 2.8em;
+  overflow: initial;
+}
+.line-numbers .line-numbers-rows {
+  border-right: 2px solid #454c58 !important;
+  top: 2em !important;
+}
+.line-numbers .line-numbers-rows > span:before {
+  color: #454c58 !important;
+}
+
+.gatsby-highlight-code-line {
+  display: block;
+  background-color: #494f58;
 }

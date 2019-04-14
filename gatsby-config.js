@@ -26,7 +26,7 @@ module.exports = {
               classPrefix: 'language-',
               inlineCodeMarker: null,
               aliases: {},
-              showLineNumbers: false,
+              showLineNumbers: true,
               noInlineHighlight: false
             }
           }
@@ -56,8 +56,17 @@ module.exports = {
     {
       resolve: `gatsby-plugin-typography`,
       options: {
-        pathToConfigModule: `src/utils/typography`
+        pathToConfigModule: `src/utils/typography`,
       }
     },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `raleway\:400,700`,
+          `merriweather\:300,400,700`
+        ]
+      }
+    }
   ]
 };

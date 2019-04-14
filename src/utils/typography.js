@@ -1,24 +1,16 @@
 import Typography from 'typography';
-import Alton from 'typography-theme-alton';
 
-Alton.overrideThemeStyles = () => {
-  return {
-    'a.gatsby-resp-image-link': {
-      boxShadow: `none`
-    },
-    a: {
-      color: '#0078da'
-    }
-  };
-};
-
-delete Alton.googleFonts;
-
-const typography = new Typography(Alton);
+const typography = new Typography({
+  baseFontSize: '18px',
+  baseLineHeight: 1.666,
+  headerFontFamily: ['Poppins', 'serif'],
+  bodyFontFamily: ['Raleway', 'sans-serif']
+});
 
 // Hot reload typography in development.
 if (process.env.NODE_ENV !== `production`) {
   typography.injectStyles();
+  console.log();
 }
 
 export default typography;

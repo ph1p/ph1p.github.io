@@ -37,7 +37,7 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
     nodes.forEach(({ node }) => {
       createPage({
         path: node.fields.slug || node.frontmatter.path,
-        component: pageTemplate,
+        component: node.fields.isPost ? postTemplate : pageTemplate,
         context: {
           ...node
         }

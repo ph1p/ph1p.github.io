@@ -2,9 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const largeCircleDiameter = 45;
-const largeCircleDiameterTiny = (63 / 100) * largeCircleDiameter;
-
-const tinyCircleDiameter = (53 / 100) * largeCircleDiameter;
+const tinyCircleDiameter = (50 / 100) * largeCircleDiameter;
 
 const smallDot = keyframes`
   0% {
@@ -31,6 +29,7 @@ const largeDot = keyframes`
     border: 1px solid #000;
     width: 19px;
     height: 19px;
+    border-color: #333;
   }
 `;
 
@@ -48,7 +47,7 @@ const LogoWrapper = styled.div`
     border-radius: 100%;
   }
   .large-dot {
-    animation: ${largeDot} 0.5s 1.5s cubic-bezier(0.6, 0.04, 0.98, 0.335)
+    animation: ${largeDot} 0.5s 1.45s cubic-bezier(0.6, 0.04, 0.98, 0.335)
       forwards;
     width: ${largeCircleDiameter}px;
     height: ${largeCircleDiameter}px;
@@ -133,18 +132,4 @@ class Logo extends React.PureComponent {
   }
 }
 
-const Wrapper = styled.div`
-  background-color: #f6f6f6;
-  cursor: none;
-  height: 100vh;
-  .logo {
-  }
-`;
-
-export default props => {
-  return (
-    <Wrapper>
-      <Logo className="logo" />
-    </Wrapper>
-  );
-};
+export default Logo;
