@@ -3,8 +3,9 @@ import Typography from 'typography';
 const typography = new Typography({
   baseFontSize: '18px',
   baseLineHeight: 1.666,
-  headerFontFamily: ['Poppins', 'serif'],
-  bodyFontFamily: ['Raleway', 'sans-serif']
+  omitGoogleFont: true,
+  headerFontFamily: ['Poppins', 'sans-serif'],
+  bodyFontFamily: ['Poppins', 'sans-serif']
 });
 
 // Hot reload typography in development.

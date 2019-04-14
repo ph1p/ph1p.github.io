@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const Wrapper = styled.section`
   position: relative;
   height: 100vh;
-  padding: 30px;
+  padding: 40px;
 `;
 
 const Main = styled.div`
@@ -16,16 +16,17 @@ const Main = styled.div`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(12, 1fr);
+  pointer-events: none;
   .logo {
     background-color: #999;
   }
   .title {
     grid-column: 1 / span 6;
     grid-row: 9 / span 4;
-    font-size: ${rhythm(3.5)};
-    line-height: ${rhythm(3.5)};
+    font-size: ${rhythm(4.5)};
+    line-height: ${rhythm(4.5)};
     align-self: end;
-    font-weight: 900;
+    font-weight: 600;
   }
 `;
 
@@ -39,7 +40,6 @@ const Skills = styled.div`
 
 const Skill = styled.div`
   border-bottom: 1px solid #000c;
-  font-weight: 600;
   line-height: 40px;
   &:nth-child(even) {
     text-align: right;
@@ -74,7 +74,8 @@ const Navigation = styled.nav`
   grid-column: 11 / span 2;
   grid-row: 1 / span 5;
   text-align: right;
-  font-weight: 900;
+  font-weight: 600;
+  pointer-events: all;
 `;
 
 const NavItem = styled.a`
