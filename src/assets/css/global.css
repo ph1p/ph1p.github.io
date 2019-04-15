@@ -2,6 +2,6 @@ body,
 html {
   overflow: auto;
   height: 100%;
-  cursor: none;
+  /* cursor: none; */
   color: #000c;
 }

@@ -16,6 +16,7 @@ class BlogIndex extends React.Component {
               </div>
             );
           })}
+          <Link to="/me">back</Link>
       </Layout>
     );
   }

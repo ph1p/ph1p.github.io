@@ -1,12 +1,34 @@
 import React from 'react';
+import TransitionLink from 'gatsby-plugin-transition-link';
+import anime from 'animejs/lib/anime.es.js';
 import { rhythm } from '../utils/typography';
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const sizes = {
+  desktop: 992,
+  tablet: 768,
+  phone: 576
+};
+
+// Iterate through the sizes and create a media template
+const media = Object.keys(sizes).reduce((acc, label) => {
+  acc[label] = (...args) => css`
+    @media (max-width: ${sizes[label] / 16}em) {
+      ${css(...args)}
+    }
+  `;
+
+  return acc;
+}, {});
 
 const Wrapper = styled.section`
   position: relative;
   height: 100vh;
   padding: 40px;
+  ${media.phone`
+    padding: 20px;
+  `}
 `;
 
 const Main = styled.div`
@@ -14,28 +36,52 @@ const Main = styled.div`
   z-index: 1;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(12, 1fr);
+  /* grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr); */
+  grid-template-areas:
+    'logo navigation'
+    'title skills';
   pointer-events: none;
   .logo {
     background-color: #999;
   }
-  .title {
-    grid-column: 1 / span 6;
-    grid-row: 9 / span 4;
-    font-size: ${rhythm(4.5)};
-    line-height: ${rhythm(4.5)};
-    align-self: end;
-    font-weight: 600;
-  }
+  grid-template-columns: 1fr 1fr;
+
+  ${media.phone`
+    grid-template-areas:
+        'logo navigation'
+        'title title'
+        'skills skills';
+  `}
+`;
+
+const Title = styled.div`
+  grid-area: title;
+  font-size: ${rhythm(4.5)};
+  line-height: ${rhythm(4.5)};
+  align-self: end;
+  font-weight: 600;
+
+  ${media.phone`
+    font-size: ${rhythm(2)};
+    line-height: ${rhythm(2)};
+  `}
 `;
 
 const Skills = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-column: 9 / span 4;
-  grid-row: 9 / span 4;
+  width: 50%;
+  min-width: 400px;
+
+  grid-area: skills;
   align-self: end;
+  justify-self: right;
+
+  ${media.phone`
+    width: 100%;
+    min-width: 100%;
+  `}
 `;
 
 const Skill = styled.div`
@@ -48,8 +94,8 @@ const Skill = styled.div`
 
 const Logo = styled.div`
   position: relative;
-  grid-column: 1 / span 2;
-  grid-row: 1 / span 2;
+
+  grid-area: logo;
   &:after,
   &:before {
     content: '';
@@ -71,20 +117,20 @@ const Logo = styled.div`
 `;
 
 const Navigation = styled.nav`
-  grid-column: 11 / span 2;
-  grid-row: 1 / span 5;
+  grid-area: navigation;
   text-align: right;
   font-weight: 600;
   pointer-events: all;
 `;
 
-const NavItem = styled.a`
+const NavItem = styled(TransitionLink)`
   position: relative;
   display: block;
   font-size: ${rhythm(1)};
   text-decoration: none;
   padding: 0 ${props => (props.active ? '20px' : 0)} 0 0;
   transition: all 0.3s;
+  color: #000c;
   &:after {
     content: '';
     opacity: ${props => (props.active ? 1 : 0)};
@@ -115,30 +161,87 @@ const Circle = styled.div`
   width: 85vh;
   border-radius: 100%;
   transition: all 0.3s;
-  &:hover {
-    transform: translate(-50%, -50%) scale(3);
-  }
 `;
 
 class BlogIndex extends React.Component {
   render() {
     return (
       <Wrapper title="Blog" keywords={[`blog`, `ph1p`]}>
-        <Circle />
+        <Circle ref="circle" />
         <Main>
           <Logo />
           <Navigation>
-            <NavItem active>Job</NavItem>
-            <NavItem>Tech</NavItem>
-            <NavItem>Me</NavItem>
+            <NavItem
+              active="true"
+              to="/blog"
+              exit={{
+                trigger: ({ exit, node }) => {
+                  const skillsTl = anime.timeline({
+                    easing: 'cubicBezier(.5, .05, .1, .3)',
+                    duration: 1000
+                  });
+                  skillsTl.add({
+                    translateX: {
+                      value: 50,
+                      duration: 200
+                    },
+                    opacity: {
+                      value: 0,
+                      duration: 100
+                    },
+                    targets: this.refs.skills
+                  });
+
+                  const tl = anime.timeline({
+                    easing: 'cubicBezier(.5, .05, .1, .3)',
+                    transformOrigin: {
+                      duration: 0,
+                      value: '0 0 0'
+                    },
+                    scale: {
+                      value: 1,
+                      duration: 0
+                    },
+                    duration: 1000
+                  });
+                  tl.add({
+                    translateY: {
+                      value: '-50%',
+                      duration: 0
+                    },
+                    translateX: {
+                      value: '-50%',
+                      duration: 0
+                    },
+                    targets: this.refs.circle,
+                    scale: {
+                      value: 2,
+                      duration: 0
+                    },
+                    opacity: {
+                      value: 0,
+                      duration: 200
+                    }
+                  });
+                },
+                length: 1
+              }}
+              entry={{
+                delay: 0.6
+              }}
+            >
+              Work
+            </NavItem>
+            {/* <NavItem>Tech</NavItem>
+            <NavItem>Me</NavItem> */}
           </Navigation>
 
-          <div className="title">
+          <Title>
             I'm a<br />
             developer
-          </div>
+          </Title>
 
-          <Skills>
+          <Skills ref="skills">
             <Skill>JavaScript</Skill>
             <Skill>Typescript</Skill>
             <Skill>React</Skill>

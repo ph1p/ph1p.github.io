@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { navigate } from 'gatsby';
 
 const largeCircleDiameter = 45;
 const tinyCircleDiameter = (50 / 100) * largeCircleDiameter;
@@ -114,6 +115,8 @@ class Logo extends React.PureComponent {
           transform: `translate(${this.state.x - 9}px, ${this.state.y - 4}px)`
         }
       }));
+
+      navigate('/me');
     }, 2000);
 
     window.addEventListener('mousemove', this.handleMouseMove);
