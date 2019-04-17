@@ -39,6 +39,7 @@ const LogoWrapper = styled.div`
   pointer-events: none;
   width: ${largeCircleDiameter - 1}px;
   cursor: none;
+  height: 100vh;
   opacity: 0;
   .large-dot,
   .small-dot {
