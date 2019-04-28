@@ -22,7 +22,6 @@ const Skills = styled.div`
   width: 50%;
   min-width: 400px;
 
-
   ${media.phone`
     width: 100%;
     min-width: 100%;
@@ -37,19 +36,20 @@ const Skill = styled.div`
   }
 `;
 
-class Me extends React.Component {
+class Music extends React.Component {
   render() {
     return (
       <MainWrapper
         title="Work"
         keywords={[`work`, `ph1p`]}
-        bottomLeft={(
+        bottomLeft={
           <Title>
-            Hi<br />
-            I'm Phil
+            I love
+            <br />
+            music
           </Title>
-        )}
-        bottomRight={(
+        }
+        bottomRight={
           <Skills>
             <Skill>JavaScript</Skill>
             <Skill>Typescript</Skill>
@@ -62,10 +62,10 @@ class Me extends React.Component {
             <Skill>CSS</Skill>
             <Skill>and and and (:</Skill>
           </Skills>
-        )}
+        }
       />
     );
   }
 }
 
-export default Me;
+export default Music;

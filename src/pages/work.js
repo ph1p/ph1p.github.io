@@ -37,7 +37,7 @@ const Skill = styled.div`
   }
 `;
 
-class Me extends React.Component {
+class Work extends React.Component {
   render() {
     return (
       <MainWrapper
@@ -45,8 +45,8 @@ class Me extends React.Component {
         keywords={[`work`, `ph1p`]}
         bottomLeft={(
           <Title>
-            Hi<br />
-            I'm Phil
+            I'm a<br />
+            developer
           </Title>
         )}
         bottomRight={(
@@ -68,4 +68,4 @@ class Me extends React.Component {
   }
 }
 
-export default Me;
+export default Work;

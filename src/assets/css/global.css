@@ -3,5 +3,9 @@ html {
   overflow: auto;
   height: 100%;
   /* cursor: none; */
-  color: #000c;
+  color: #000;
+  overflow: hidden;
+}
+.tl-edges {
+  overflow: hidden;
 }
