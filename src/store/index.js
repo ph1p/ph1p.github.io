@@ -15,8 +15,8 @@ export default store({
       bgColorCircle: '#ffffff'
     },
     '/work': {
-      bgColor: '#ffffff',
-      bgColorCircle: '#fcc187'
+      bgColor: '#fcc187',
+      bgColorCircle: '#ffffff'
     },
     '/music': {
       bgColor: '#4985a9',

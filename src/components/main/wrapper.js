@@ -5,10 +5,12 @@ import anime from 'animejs/lib/anime.es.js';
 import { rhythm } from '../../utils/typography';
 import { media } from '../../utils/styles';
 import Layout from '../layout';
+import Cursor from '../cursor';
 
 import styled from 'styled-components';
 
 const Wrapper = styled(Layout)`
+  cursor: none;
   position: relative;
   height: 100vh;
   padding: 40px;
@@ -16,6 +18,9 @@ const Wrapper = styled(Layout)`
   ${media.phone`
     padding: 20px;
   `}
+  * {
+    cursor: none;
+  }
 `;
 
 const Main = styled.div`
@@ -198,6 +203,7 @@ class MainWrapper extends Component {
 
     return (
       <Wrapper title={title} keywords={keywords} bgColor={this.state.bgColor}>
+        <Cursor />
         <Main ref="main">
           <Circle bgColorCircle={this.state.bgColorCircle} ref="circle" />
           <AnimCircle
