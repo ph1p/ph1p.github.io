@@ -161,7 +161,9 @@ class MainWrapper extends Component {
     this.siteChangeExit = this.siteChangeExit.bind(this);
     this.siteChangeEnter = this.siteChangeEnter.bind(this);
 
-    const { bgColor, bgColorCircle } = store.pages[window.location.pathname];
+    const { bgColor, bgColorCircle } = store.pages[
+      typeof window !== `undefined` ? window.location.pathname : '/'
+    ];
 
     this.state = {
       bgColor,
